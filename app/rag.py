@@ -7,10 +7,11 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import time
+from langchain_community.embeddings import FastEmbedEmbeddings
 load_dotenv()
 
 # ── Embedder and LLM — created once, reused for all requests ──
-embedder = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+embedder = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
 llm = ChatGroq(model="llama-3.3-70b-versatile")
 
 # ── Vector store — holds all uploaded document chunks ──────────
