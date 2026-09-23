@@ -2,6 +2,8 @@ import os
 import time
 import shutil
 from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from app.rag import process_pdf, ask_question
 
@@ -10,6 +12,9 @@ app = FastAPI(title="Production RAG API")
 # Temp folder for uploaded PDFs
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 # ── Request/Response models ────────────────────────────────────
@@ -25,6 +30,11 @@ class QuestionResponse(BaseModel):
 # ── Endpoints ──────────────────────────────────────────────────
 @app.get("/")
 def root():
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+
+
+@app.get("/health")
+def health():
     return {"status": "RAG API is running"}
 
 

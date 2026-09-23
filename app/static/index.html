@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RAG PDF Assistant</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div>
+          <h1>RAG Assistant</h1>
+          <p class="brand-sub">Ask questions about your PDFs</p>
+        </div>
+      </div>
+
+      <div id="dropzone" class="dropzone">
+        <input id="file-input" type="file" accept="application/pdf" hidden />
+        <svg viewBox="0 0 24 24" class="dropzone-icon" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 16V4m0 0L7 9m5-5l5 5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="dropzone-title">Drop a PDF here</p>
+        <p class="dropzone-sub">or click to browse</p>
+      </div>
+
+      <div id="upload-status" class="upload-status" hidden></div>
+
+      <div class="doc-list-wrap">
+        <h2 class="section-label">Uploaded documents</h2>
+        <ul id="doc-list" class="doc-list">
+          <li class="doc-empty">No documents yet</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="chat">
+      <div id="messages" class="messages">
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" class="empty-icon" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>Upload a PDF, then ask a question about it.</p>
+        </div>
+      </div>
+
+      <form id="ask-form" class="composer">
+        <textarea
+          id="question-input"
+          placeholder="Ask a question about your documents…"
+          rows="1"
+          disabled
+        ></textarea>
+        <button id="send-btn" type="submit" disabled aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

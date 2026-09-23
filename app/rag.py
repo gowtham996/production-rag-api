@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
@@ -12,7 +12,7 @@ load_dotenv()
 
 # ── Embedder and LLM — created once, reused for all requests ──
 embedder = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
-llm = ChatGroq(model="llama-3.3-70b-versatile")
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=os.getenv("GEMINI_API_KEY"))
 
 # ── Vector store — holds all uploaded document chunks ──────────
 # persist_directory saves ChromaDB to disk so data survives restarts
